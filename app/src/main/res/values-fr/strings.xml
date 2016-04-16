@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Compteur YABPM</string>
+    <string name="bpm_hitme">FRAPPEZ-MOI AVEC VOTRE BÂTON DE RTHYTHME</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="bpm_reset">Réinitialiser</string>
+    <string name="median">Médiane</string>
+    <string name="title_activity_main">Encore un Autre Compteur de BPM</string>
+</resources>

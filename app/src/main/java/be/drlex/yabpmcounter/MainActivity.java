@@ -95,8 +95,8 @@ public class MainActivity extends ActionBarActivity {
 
             long bpmMedian = Math.round(medianFromFloatDeque(bpmValuesDeque));
 
-            bpmButton.setText(String.format("%.1f", bpmEstimate) + "\n" + R.string.bpm_hitme + ": "
-                    + String.valueOf(bpmMedian));
+            bpmButton.setText(String.format("%.1f", bpmEstimate) + "\n" + getString(R.string.median)
+                    + ": " + String.valueOf(bpmMedian));
             return true;
         }
     };

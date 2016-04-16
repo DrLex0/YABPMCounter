@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">YABPM Counter</string>
+    <string name="action_settings">Settings</string>
     <string name="title_activity_main">Yet Another BPM Counter</string>
     <string name="bpm_hitme">HIT ME WITH YOUR RHYTHM STICK</string>
     <string name="bpm_reset">Reset</string>
-    <string name="action_settings">Settings</string>
     <string name="median">Median</string>
-
 </resources>

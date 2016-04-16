@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YABPM 节拍器</string>
+    <string name="title_activity_main">另一种BPM节拍器</string>
+    <string name="action_settings">设置</string>
+    <string name="bpm_hitme">请用你的节奏棒击中我</string>
+    <string name="bpm_reset">复位</string>
+    <string name="median">中位数</string>
+</resources>

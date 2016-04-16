@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">YABPM Counter</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="bpm_hitme">SLA MIJ MET JE RITMESTOK</string>
+    <string name="bpm_reset">Reset</string>
+    <string name="median">Mediaan</string>
+    <string name="title_activity_main">De Zoveelste BPM-Teller</string>
+</resources>
