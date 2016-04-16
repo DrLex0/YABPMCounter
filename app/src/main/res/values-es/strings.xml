@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Contador YABPM</string>
+    <string name="bpm_hitme">GOLPEA ME CON SU PALILLO DEL RITMO</string>
+    <string name="action_settings">Configuración</string>
+    <string name="bpm_reset">Reiniciar</string>
+    <string name="median">Mediana</string>
+    <string name="title_activity_main">Aún Otro Contador de BPM</string>
+</resources>

@@ -36,12 +36,12 @@ import java.util.Arrays;
 
 
 public class MainActivity extends ActionBarActivity {
-    private Button bpmButton, resetButton;
+    private static final long TIMING_DEQUE_SIZE = 16;
+    private static final long MEDIAN_DEQUE_SIZE = 9;
+    private Button bpmButton;
     private long lastButtonPushTime;
     private ArrayDeque<Long> timingValuesDeque;
     private ArrayDeque<Float> bpmValuesDeque;
-    private final long timing_deque_size = 16;
-    private final long median_deque_size = 9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +54,14 @@ public class MainActivity extends ActionBarActivity {
 
         bpmButton = (Button) findViewById(R.id.bpm_button);
         bpmButton.setOnTouchListener(onBpmButtonTouch);
-        resetButton = (Button) findViewById(R.id.reset_button);
+        Button resetButton = (Button) findViewById(R.id.reset_button);
         resetButton.setOnClickListener(onResetButtonClick);
         // For a longer title in the title bar.
         // (From API level 11 on, getActionBar can be used)
         getSupportActionBar().setTitle(R.string.title_activity_main);
     }
 
-    private View.OnTouchListener onBpmButtonTouch = new View.OnTouchListener() {
+    private final View.OnTouchListener onBpmButtonTouch = new View.OnTouchListener() {
         public boolean onTouch(View v, MotionEvent motionEvent) {
             if (motionEvent.getAction() != MotionEvent.ACTION_DOWN)
                 return false;
@@ -71,7 +71,7 @@ public class MainActivity extends ActionBarActivity {
                 lastButtonPushTime = currentTime;
                 return true;
             }
-            Long timeElapsed = Long.valueOf(currentTime - lastButtonPushTime);
+            Long timeElapsed = currentTime - lastButtonPushTime;
             lastButtonPushTime = currentTime;
 
             // Detect missed beat: current measurement appears twice the last one
@@ -82,7 +82,7 @@ public class MainActivity extends ActionBarActivity {
                 timingValuesDeque.addFirst(timeElapsed);
             }
             timingValuesDeque.addFirst(timeElapsed);
-            while (timingValuesDeque.size() > timing_deque_size)
+            while (timingValuesDeque.size() > TIMING_DEQUE_SIZE)
                 timingValuesDeque.removeLast();
 
             float weightedAverageTime = decayingWeightedAverageFromDeque(timingValuesDeque);
@@ -90,7 +90,7 @@ public class MainActivity extends ActionBarActivity {
 
             // Calculate median of the set of previous weighted averages
             bpmValuesDeque.addFirst(bpmEstimate);
-            while (bpmValuesDeque.size() > median_deque_size)
+            while (bpmValuesDeque.size() > MEDIAN_DEQUE_SIZE)
                 bpmValuesDeque.removeLast();
 
             long bpmMedian = Math.round(medianFromFloatDeque(bpmValuesDeque));
@@ -101,7 +101,7 @@ public class MainActivity extends ActionBarActivity {
         }
     };
 
-    private View.OnClickListener onResetButtonClick = new View.OnClickListener() {
+    private final View.OnClickListener onResetButtonClick = new View.OnClickListener() {
         public void onClick(View v) {
             timingValuesDeque.clear();
             bpmValuesDeque.clear();
@@ -115,7 +115,7 @@ public class MainActivity extends ActionBarActivity {
         int valuesAdded = 0;
         // Weighted average: exponentially decrease the weight after the third value
         for (Long value : deque) {
-            weightedAverage += (Long) value * weight;
+            weightedAverage += value * weight;
             totalWeight += weight;
             valuesAdded++;
             if (valuesAdded > 3)
@@ -127,9 +127,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private float medianFromFloatDeque(ArrayDeque<Float> deque) {
-        float bpmValuesArray[] = new float[bpmValuesDeque.size()];
+        float bpmValuesArray[] = new float[deque.size()];
         int i = 0;
-        for (Float value : bpmValuesDeque) {
+        for (Float value : deque) {
             bpmValuesArray[i] = value;
             i++;
         }
